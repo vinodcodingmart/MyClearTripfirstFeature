@@ -1,0 +1,8 @@
+keyword,url,slot,apply_count
+bangalore,http://localhost:3000/hotels/1,a,0
+Hotels in bangalore,http://localhost:3000/hotels/2,b,0
+xxxx,http://localhost:3000/hotels/3,c,0
+yyyy,http://localhost:3000/hotels/4,d,0
+zzzz,http://localhost:3000/hotels/5,e,0
+Gavi Gangadeshwara Temple,http://localhost:3000/hotels/1,a,0
+located in bangolore rajajinagar,http://localhost:3000/hotels/1,b,0

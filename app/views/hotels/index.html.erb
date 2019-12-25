@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Hotels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Content</th>
+      <th>Slot</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hotels.each do |hotel| %>
+      <tr>
+        <td><%= hotel.name %></td>
+        <td><%= hotel.content.html_safe %></td>
+        <td><%= hotel.slot %></td>
+        <td><%= hotel.url %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= form_tag({:action => :import}, multipart: true) do %>
+  <%= file_field_tag :file, required: true %></br>
+  Slot: <%= select_tag "slot", options_for_select([ "a", "b", "c", "d", "e" ], "a") %></br>
+  <%= submit_tag( "Upload and Process" ) %>
+<% end %>
+<%= link_to 'New Hotel', new_hotel_path %>
