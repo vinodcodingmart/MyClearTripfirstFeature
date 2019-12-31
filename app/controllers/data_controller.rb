@@ -76,16 +76,17 @@ class DataController < ApplicationController
       csv_data = Datum.where(slot: params[:slot])
       csv_data.each{|rec|
         @hotels.each { |hotel|
-          if hotel.content.downcase.include?(rec.keyword.downcase) && rec.slot == slot && rec.apply_count < 3
+          if hotel.content.downcase.include?(rec.keyword.downcase) && rec.slot == slot && rec.apply_count.to_i < 3
             hotel.update(previous_content: hotel.content) unless hotel.previous_content.present?
             content = hotel.content
             sub_content_index = content.downcase.index(rec.keyword.downcase)
             content[sub_content_index...(sub_content_index+rec.keyword.length)] = "<a href= '#{rec.url}'>#{rec.keyword}</a>"
             hotel.update(content: content)
+            rec.update(apply_count: rec.apply_count.to_i+1)
           end
         }
       }
-    redirect_to data_path
+    redirect_to hotels_path
   end
 
   private

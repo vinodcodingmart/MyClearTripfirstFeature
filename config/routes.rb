@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :cities
+  resources :interlinks do
+    collection do
+      post 'import'
+      post 'update_hotel_content'
+    end
+  end
   resources :data do
     collection do
       post 'import'

@@ -1,0 +1,88 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    #myInput {
+      background-repeat: no-repeat;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+    }
+
+    #myTable {
+      border-collapse: collapse;
+      width: 100%;
+      border: 1px solid #ddd;
+      font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+      text-align: left;
+      padding: 12px;
+    }
+
+    #myTable tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<p id="notice"><%= notice %></p>
+<%= form_tag({:action => :import}, multipart: true) do %>
+  <%= file_field_tag :file, required: true %></br>
+  <%= submit_tag "Import" %>
+<% end %>
+<%= form_tag({:action => :update_hotel_content}) do %>
+  Slot: <%= select_tag "slot", options_for_select([ "a", "b", "c", "d", "e" ], @selected_slot) %>
+  <%= submit_tag "Apply Filter" %>
+<% end %>
+Keyword Search:<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Keywords" title="Type in a name">
+<h1>Interlinks</h1>
+
+<table id="myTable">
+  <thead>
+    <tr>
+      <th>Keyword</th>
+      <th>Url</th>
+      <th>Slot</th>
+      <th>Apply count</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interlinks.each do |interlink| %>
+      <tr>
+        <td><%= interlink.keyword %></td>
+        <td><%= interlink.url %></td>
+        <td><%= interlink.slot %></td>
+        <td><%= interlink.apply_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>

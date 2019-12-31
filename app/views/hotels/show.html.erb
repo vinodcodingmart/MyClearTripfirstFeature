@@ -10,15 +10,5 @@
   <%= @hotel.content.html_safe %>
 </p>
 
-<p>
-  <strong>Slot:</strong>
-  <%= @hotel.slot %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @hotel.url %>
-</p>
-
 <%= link_to 'Edit', edit_hotel_path(@hotel) %> |
 <%= link_to 'Back', hotels_path %>

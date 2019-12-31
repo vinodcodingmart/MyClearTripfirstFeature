@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Keyword:</strong>
+  <%= @interlink.keyword %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @interlink.url %>
+</p>
+
+<p>
+  <strong>Slot:</strong>
+  <%= @interlink.slot %>
+</p>
+
+<p>
+  <strong>Apply count:</strong>
+  <%= @interlink.apply_count %>
+</p>
+
+<%= link_to 'Edit', edit_interlink_path(@interlink) %> |
+<%= link_to 'Back', interlinks_path %>
