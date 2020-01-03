@@ -6,10 +6,10 @@ class InterlinksController < ApplicationController
   def index
     @selected_slot = 'a'
     if params[:slot].present?
-      @interlinks = Interlink.where(slot: params[:slot])
+      @interlinks = Interlink.where(slot: params[:slot]).page(params[:page]).per(5)
       @selected_slot = params[:slot]
     else
-      @interlinks = Interlink.all
+      @interlinks = Interlink.all.page(params[:page]).per(5)
     end
   end
 
